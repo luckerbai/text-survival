@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* 永夜荒原 — 暗色生存风主题 */
+:root {
+  color-scheme: dark;
+  --font-game: ui-monospace, "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  --font-body: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #0b0f14;
+  color: #d6dde5;
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+
+/* 数值条 */
+.stat-bar {
+  height: 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.stat-bar > div {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.25s ease;
+}
+
+/* 终端日志流 */
+.log-stream {
+  font-family: var(--font-game);
+  scrollbar-width: thin;
+  scrollbar-color: #3b4a5a #0e141b;
+}
+.log-stream::-webkit-scrollbar {
+  width: 8px;
+}
+.log-stream::-webkit-scrollbar-thumb {
+  background: #3b4a5a;
+  border-radius: 4px;
+}
+
+/* 行动按钮 */
+.action-btn {
+  @apply select-none rounded-lg border border-slate-600/40 bg-slate-800/60 px-3 py-2 text-sm text-slate-200 transition-colors hover:border-slate-400/60 hover:bg-slate-700/60 disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+.action-btn:focus-visible {
+  @apply outline-2 outline-offset-1 outline-amber-400;
+}
+
+/* 战斗 / 死亡 / 存档弹层 */
+.overlay-panel {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm;
+}

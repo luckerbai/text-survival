@@ -1,0 +1,33 @@
+{
+  "name": "text-wilds",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "永夜荒原 Text Wilds — 文字版生存游戏（Don't Starve 风格，Web 交互版）",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "type-check": "vue-tsc --noEmit",
+    "e2e": "pnpm build && playwright test",
+    "verify:core": "node scripts/verify-core.mjs http://127.0.0.1:5173",
+    "verify:loop": "node scripts/verify-loop.mjs http://127.0.0.1:5173"
+  },
+  "dependencies": {
+    "vue": "^3.5.43"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.0.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1",
+    "vue-tsc": "^3.0.0"
+  },
+  "packageManager": "pnpm@12.6.0"
+}
