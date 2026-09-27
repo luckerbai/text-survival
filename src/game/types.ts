@@ -205,6 +205,8 @@ export interface GameState {
   fire: FireState | null
   location: LocationId
   weather: Weather
+  /** 自动采集开关：开启后时间流逝的每个回合静默产出当前地点资源（小黑屋式挂机积累） */
+  autoGather: boolean
   log: LogEntry[]
   dead: boolean
   stats: Stats

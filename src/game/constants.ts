@@ -38,6 +38,9 @@ export const START_SANITY = 80
  */
 export const START_INVENTORY: Partial<Record<MaterialId, number>> = { grass: 2, wood: 2, flint: 1 }
 
+/** 时间自动流逝：现实 N 秒推进 1 个游戏回合（8 秒/回合；一昼夜 8 回合 ≈ 64 秒） */
+export const REAL_SECONDS_PER_TURN = 8
+
 /** 饥饿归零后每回合扣血 */
 export const STARVE_DAMAGE = 4
 

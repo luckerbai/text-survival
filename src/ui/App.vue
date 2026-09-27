@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ENEMIES, LOCATIONS, MATERIALS, STRUCTURES, EQUIPMENT } from '@/game/constants'
+import { ENEMIES, LOCATIONS, MATERIALS, STRUCTURES, EQUIPMENT, REAL_SECONDS_PER_TURN } from '@/game/constants'
 import { tryLoadSave, useGame } from './composables/useGame'
 import ActionPanel from './components/ActionPanel.vue'
 import BattlePanel from './components/BattlePanel.vue'
@@ -50,6 +50,7 @@ tryLoadSave()
         <span>{{ weatherLabel }}</span>
         <span :class="state.fire ? 'text-amber-300' : 'text-red-400'" class="font-mono">{{ fireLabel }}</span>
         <span class="text-slate-400">{{ locationName }}</span>
+        <span class="text-xs text-slate-500" data-tick-hint>⏳ 时间流逝 · {{ REAL_SECONDS_PER_TURN }}秒/回合</span>
       </div>
     </header>
 

@@ -43,6 +43,12 @@ export async function resetSave(page: Page): Promise<void> {
   await page.waitForTimeout(300)
 }
 
+/** 进入游戏页：默认禁用时间自动流逝（E2E 确定性）；fast = 加速流逝专用 */
+export async function gotoGame(page: Page, mode: 'off' | 'fast' | 'on' = 'off'): Promise<void> {
+  const q = mode === 'off' ? '?tick=off' : mode === 'fast' ? '?tick=fast' : ''
+  await page.goto(`/${q}`)
+}
+
 /** 背包材料数量（无该材料返回 0）——显式短超时，防止空元素无限等待（Playwright timeout:0 = 不超时） */
 export async function matCount(page: Page, id: string): Promise<number> {
   const count = await page

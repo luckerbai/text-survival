@@ -65,6 +65,21 @@ describe('deserialize 校验', () => {
     expect(restored.sanity).toBe(0)
   })
 
+  it('autoGather 往返一致（开）', () => {
+    const s = createInitialState()
+    s.autoGather = true
+    const restored = deserialize(serialize(s))
+    expect(restored.autoGather).toBe(true)
+  })
+
+  it('旧存档（无 autoGather 字段）读档时补默认 false', () => {
+    const s = createInitialState()
+    const raw = JSON.parse(serialize(s)) as Record<string, unknown>
+    delete raw.autoGather
+    const restored = deserialize(JSON.stringify(raw))
+    expect(restored.autoGather).toBe(false)
+  })
+
   it('损坏的 phase 回退为 day', () => {
     const s = createInitialState()
     const raw = JSON.parse(serialize(s)) as Record<string, unknown>

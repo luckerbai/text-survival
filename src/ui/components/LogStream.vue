@@ -33,7 +33,7 @@ const kindColor = (kind: string) => {
 </script>
 
 <template>
-  <section class="log-stream flex min-h-0 flex-col overflow-y-auto rounded-xl border border-slate-700/50 bg-black/40 p-3">
+  <section data-log class="log-stream flex min-h-0 flex-col overflow-y-auto rounded-xl border border-slate-700/50 bg-black/40 p-3">
     <div class="mb-2 text-xs font-semibold tracking-wider text-slate-500 uppercase">生存日志</div>
     <div ref="streamEl" class="flex-1 space-y-1 overflow-y-auto font-mono text-[13px] leading-relaxed">
       <p v-for="entry in state.log" :key="entry.id" class="whitespace-pre-wrap break-words" :class="kindColor(entry.kind)">

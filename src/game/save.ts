@@ -84,6 +84,7 @@ export function deserialize(json: string): GameState {
       : null,
     location: typeof raw.location === 'string' ? (raw.location as never) : 'clearing',
     weather: raw.weather === 'rain' ? 'rain' : 'clear',
+    autoGather: raw.autoGather === true,
     log: raw.log,
     dead: raw.dead === true,
     battle: isRecord(raw.battle) && isRecord(raw.battle.enemy)

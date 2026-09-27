@@ -6,9 +6,38 @@ import { ref } from 'vue'
 import { doAction, equip as equipEngine } from '@/game/actions'
 import { deserialize, loadFromStorage, saveToStorage, serialize } from '@/game/save'
 import { createInitialState } from '@/game/state'
+import { tick } from '@/game/time'
 import type { GameState, PlayerAction } from '@/game/types'
 
 const state = ref<GameState>(createInitialState())
+
+// —— 时间自动流逝（小黑屋式）——
+// 单页应用单实例：模块加载即启动世界计时。战斗/死亡时引擎自动暂停。
+// URL 参数控制（用于测试与调试）：
+//   ?tick=off  完全关闭自动流逝（E2E 确定性）
+//   ?tick=fast 加速：每帧推进 1 回合（时间流逝 E2E 专用）
+const TICK_INTERVAL_MS = 500
+/** fast 模式每帧注入的现实毫秒（等效 1 回合/帧） */
+const FAST_FRAME_MS = 8000
+
+function tickerMode(): 'on' | 'off' | 'fast' {
+  if (typeof window === 'undefined') return 'off'
+  const mode = new URLSearchParams(window.location.search).get('tick')
+  if (mode === 'off') return 'off'
+  if (mode === 'fast') return 'fast'
+  return 'on'
+}
+
+const mode = tickerMode()
+if (mode !== 'off') {
+  const frameMs = mode === 'fast' ? FAST_FRAME_MS : TICK_INTERVAL_MS
+  setInterval(() => {
+    const result = tick(state.value, frameMs)
+    if (result.turns > 0 || result.battleStarted) {
+      saveToStorage(state.value)
+    }
+  }, TICK_INTERVAL_MS)
+}
 
 /** 尝试恢复上次存档 */
 export function tryLoadSave(): boolean {
@@ -37,6 +66,13 @@ export function useGame() {
   function newGame(): void {
     state.value = createInitialState()
     saveToStorage(state.value)
+  }
+
+  /** 切换自动采集（小黑屋式挂机积累） */
+  function toggleAutoGather(): boolean {
+    state.value.autoGather = !state.value.autoGather
+    saveToStorage(state.value)
+    return state.value.autoGather
   }
 
   /** 读档（来自 localStorage 或导入文件） */
@@ -70,5 +106,5 @@ export function useGame() {
     URL.revokeObjectURL(url)
   }
 
-  return { state, dispatch, equip, newGame, loadGame, exportJson, importJson, downloadSave }
+  return { state, dispatch, equip, newGame, toggleAutoGather, loadGame, exportJson, importJson, downloadSave }
 }

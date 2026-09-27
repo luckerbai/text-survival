@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { handleBattle, matCount, resetSave, safeClick } from './helpers'
+import { handleBattle, gotoGame, matCount, resetSave, safeClick } from './helpers'
 
 /**
  * 核心路径 1：首夜生存 + 制作流程（制作火把 → 采集 → 制作斧头 → 撑过第一夜）
@@ -7,7 +7,7 @@ import { handleBattle, matCount, resetSave, safeClick } from './helpers'
  */
 test.describe('核心路径 1：首夜生存与制作', () => {
   test('制作火把、斧头并撑过第一夜', async ({ page }) => {
-    await page.goto('/')
+    await gotoGame(page)
     await resetSave(page)
 
     // 1) 制作火把（初始材料 grass2+wood2）

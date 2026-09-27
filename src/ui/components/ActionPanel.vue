@@ -4,10 +4,11 @@ import { LOCATIONS } from '@/game/constants'
 import { hasMaterials } from '@/game/actions'
 import { useGame } from '../composables/useGame'
 
-const { state, dispatch } = useGame()
+const { state, dispatch, toggleAutoGather } = useGame()
 
 const inBattle = computed(() => state.value.battle !== null)
 const isDead = computed(() => state.value.dead)
+const autoGather = computed(() => state.value.autoGather)
 
 function act(type: 'gather' | 'explore' | 'rest') {
   dispatch({ type })
@@ -35,6 +36,19 @@ function move(to: keyof typeof LOCATIONS) {
         探索
       </button>
       <button class="action-btn" data-action="rest" @click="act('rest')">休息</button>
+
+      <span class="mx-2 h-5 w-px bg-slate-700" />
+
+      <button
+        class="action-btn text-xs"
+        :class="autoGather ? 'border-emerald-400/70 text-emerald-300' : 'border-slate-600 text-slate-400'"
+        data-auto-gather
+        :aria-label="autoGather ? '关闭自动采集' : '开启自动采集'"
+        @click="toggleAutoGather()"
+      >
+        ⚙ 自动采集：{{ autoGather ? '开' : '关' }}
+      </button>
+      <span class="text-xs text-slate-500">开启后时间流逝时每回合静默产出当前地点资源</span>
 
       <span class="mx-2 h-5 w-px bg-slate-700" />
 

@@ -44,7 +44,7 @@ export function setLogCounter(n: number): void {
   logCounter = Math.max(0, Math.floor(n))
 }
 
-function pushLog(state: GameState, text: string, kind: LogEntry['kind'] = 'info'): void {
+export function pushLog(state: GameState, text: string, kind: LogEntry['kind'] = 'info'): void {
   const lastId = state.log.length > 0 ? (state.log.at(-1)?.id ?? 0) : 0
   logCounter = Math.max(logCounter, lastId) + 1
   state.log.push({ id: logCounter, day: state.day, phase: state.phase, text, kind })
@@ -73,6 +73,7 @@ export function createInitialState(): GameState {
     fire: null,
     location: START_LOCATION,
     weather: START_WEATHER,
+    autoGather: false,
     log: [],
     dead: false,
     stats: createInitialStats(),

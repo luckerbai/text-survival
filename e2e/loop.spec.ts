@@ -1,11 +1,11 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
-import { handleBattle, resetSave, safeClick } from './helpers'
+import { gotoGame, handleBattle, resetSave, safeClick } from './helpers'
 
 /** 核心路径 2：死亡 → 重开 → 存档导出/导入 → 刷新恢复 */
 test.describe('核心路径 2：完整游戏循环', () => {
   test('饥饿致死、死亡结算、重开、导出导入存档、刷新恢复', async ({ page }) => {
-    await page.goto('/')
+    await gotoGame(page)
     await resetSave(page)
 
     // 1) 反复行动直到死亡（饥饿耗尽扣血 / 战斗）
