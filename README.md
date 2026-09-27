@@ -83,3 +83,10 @@ pnpm verify:live      # 线上可玩性终验：真实浏览器打开 Vercel 线
 
 - 代码：`https://github.com/luckerbai/text-survival`
 - 相关项目：[Developer Portfolio Lab](https://developer-portfolio-lab.vercel.app) · [Weekly Digest CLI](https://github.com/luckerbai/weekly-digest-cli)
+
+---
+
+## 灵感与致谢
+
+- 时间自动流逝的挂机生存体验，灵感来自开源文字生存游戏 [A Dark Room](https://github.com/doublespeakgames/adarkroom)（[MPL-2.0](https://github.com/doublespeakgames/adarkroom/blob/master/LICENSE.md)）——仅借鉴玩法机制，代码为本项目从零实现，未包含其任何源码
+- 生存玩法基调参考《Don't Starve》（昼夜 / 理智 / 火源 / 猎犬）
