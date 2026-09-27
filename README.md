@@ -4,7 +4,7 @@
 
 一座永夜荒原上，你从篝火余烬旁醒来。采集、制作、迁徙、点燃火把、与猎犬搏斗——在理智与饥饿的夹缝中活下去。
 
-▶ 在线试玩：`https://text-wilds.vercel.app`（部署完成后生效）
+▶ 在线试玩：`https://text-survival-pi.vercel.app`
 
 ---
 
